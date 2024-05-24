@@ -9,7 +9,7 @@ Monitor your game with [paperclips-reporter](https://github.com/marclitchfield/p
 ## Setup
 Make a bookmark with this url:
 ```
-javascript: (function() { var a = document.createElement("script"); a.src = "https://marclitchfield.github.io/paperclips-auto/paperclips-auto.js"; document.getElementsByTagName("head")[0].appendChild(a) })();
+javascript: (function() { var a = document.createElement("script"); a.src = "https://klebanoff.github.io/paperclips-auto/paperclips-auto.js"; document.getElementsByTagName("head")[0].appendChild(a) })();
 ```
 Then navigate to the game at http://www.decisionproblem.com/paperclips/index2.html, and select the bookmark. 
 
