@@ -6,7 +6,7 @@
   let cache = {};
 
   // Global Rule Parameters
-  const AcceptOffer = false;
+  const AcceptOffer = true;
   const MaxMemory = 250;
   const MemoryToProcessorsRatio = 2;
   const PreferredStrategyIndex = 4; // Greedy
