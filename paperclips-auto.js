@@ -13,15 +13,16 @@
   const SwarmComputingLevel = 150;
   // Phase 1 Rule Parameters
   const MinWire = 10;
-  const MaxMarketing = 14;
+  const MaxMarketing = 20;
   const MinClipPrice = 0.01;
-  const MaxClipPrice = 1.00;
+  const MaxClipPrice = 2.50;
   const UnsoldClipsToSalesRatio = 10;
   const AutoclipperToMarketingRatio = 12;
   const MaxAutoclippers = 100;
-  const MaxMegaclippers = 80;
+  const MaxMegaclippers = 300;
   const MaxAutoclippersForManualClipping = 20;
   const InvestmentStrategyIndex = 2; // High risk
+  const InvestmentMaxLevel = 6;
   const MinWireForInvestment = 5000;
   const MinPassiveInvestmentLevel = 30000;
   const MinActiveInvestmentLevel = 10000000;
@@ -181,7 +182,7 @@
             {
               description: 'improve investments',
               control: 'btnImproveInvestments',
-              condition: () => true
+              condition: () => val('investmentLevel') < InvestmentMaxLevel
             },
             {
               description: 'investment strategy',
