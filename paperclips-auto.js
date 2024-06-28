@@ -139,9 +139,21 @@
           condition: () => exists('synchButtonDiv')
         },
         {
-          description: 'swarm computing adjustment',
+          description: 'swarm computing adjustment phase 2',
           control: 'slider',
-          condition: () => exists('swarmSliderDiv') && parseFloat(el('slider').value) !== SwarmComputingLevel,
+          condition: () => exists('powerDiv') && (val('availableMatterDisplay') !== 0 && val('acquiredMatterDisplay') !== 0) && exists('swarmSliderDiv') && parseFloat(el('slider').value) !== SwarmComputingLevel,
+          action: (control) => control.value = SwarmComputingLevel
+        },
+        {
+          description: 'swarm computing adjustment phase 2(end) 100% compute',
+          control: 'slider',
+          condition: () => exists('powerDiv') && (val('availableMatterDisplay') === 0 && val('acquiredMatterDisplay') === 0) && exists('swarmSliderDiv') && parseFloat(el('slider').value) !== 200,
+          action: (control) => control.value = 200
+        },
+        {
+          description: 'swarm computing adjustment phase 3',
+          control: 'slider',
+          condition: () => exists('probeDesignDiv') && exists('swarmSliderDiv') && parseFloat(el('slider').value) !== SwarmComputingLevel,
           action: (control) => control.value = SwarmComputingLevel
         }
       ]
