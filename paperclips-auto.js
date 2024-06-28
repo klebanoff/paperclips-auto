@@ -255,43 +255,43 @@
             {
               description: '# make harvester x 1000',
               control: 'btnHarvesterx1000',
-              condition: () => shouldMakeDrone(val('harvesterLevelDisplay'), 1000)
+              condition: () => shouldMakeHarvesterDrone(val('harvesterLevelDisplay'), 1000)
             },
             {
               description: '# make wire drone x 1000',
               control: 'btnWireDronex1000',
-              condition: () => shouldMakeDrone(val('wireDroneLevelDisplay'), 1000)
+              condition: () => shouldMakeWireDrone(val('wireDroneLevelDisplay'), 1000)
             },
             {
               description: '# make harvester x 100',
               control: 'btnHarvesterx100',
-              condition: () => shouldMakeDrone(val('harvesterLevelDisplay'), 100)
+              condition: () => shouldMakeHarvesterDrone(val('harvesterLevelDisplay'), 100)
             },
             {
               description: '# make wire drone x 100',
               control: 'btnWireDronex100',
-              condition: () => shouldMakeDrone(val('wireDroneLevelDisplay'), 100)
+              condition: () => shouldMakeWireDrone(val('wireDroneLevelDisplay'), 100)
             },
             {
               description: '# make harvester x 10',
               control: 'btnHarvesterx10',
-              condition: () => shouldMakeDrone(val('harvesterLevelDisplay'), 10)
+              condition: () => shouldMakeHarvesterDrone(val('harvesterLevelDisplay'), 10)
             },
             {
               description: '# make wire drone x 10',
               control: 'btnWireDronex10',
-              condition: () => shouldMakeDrone(val('wireDroneLevelDisplay'), 10)
+              condition: () => shouldMakeWireDrone(val('wireDroneLevelDisplay'), 10)
             },
             {
               description: '# make harvester',
               control: 'btnMakeHarvester',
-              condition: () => shouldMakeDrone(val('harvesterLevelDisplay'), 1)
+              condition: () => shouldMakeHarvesterDrone(val('harvesterLevelDisplay'), 1)
                 || val('harvesterLevelDisplay') === 0
             },
             {
               description: '# make wire drone',
               control: 'btnMakeWireDrone',
-              condition: () => shouldMakeDrone(val('wireDroneLevelDisplay'), 1)
+              condition: () => shouldMakeWireDrone(val('wireDroneLevelDisplay'), 1)
                 || val('wireDroneLevelDisplay') === 0
             }
           ]
@@ -410,11 +410,17 @@
     }
   ]
 
-  function shouldMakeDrone(currentLevel, multiplier) {
+  function shouldMakeHarvesterDrone(currentLevel, multiplier) {
     return (currentLevel + multiplier <= DroneToFactorySquaredRatio * val('factoryLevelDisplay') ** 2)
       && (currentLevel + multiplier * 10 > DroneToFactorySquaredRatio * val('factoryLevelDisplay') ** 2)
       && ((val('powerConsumptionRate')+PowerProductionBias) <= val('powerProductionRate'))
       && (currentLevel < MaxDrones)
+  }
+
+  function shouldMakeWireDrone(currentLevel, multiplier) {
+    return (val('maps')>val('wpps'))
+    && ((val('powerConsumptionRate')+PowerProductionBias) <= val('powerProductionRate')) 
+    && (currentLevel < MaxDrones)
   }
 
   function shouldRaiseProbeLevel(currentLevel, maxValue, targetPercentage) {
