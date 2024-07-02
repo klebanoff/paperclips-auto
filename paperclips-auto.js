@@ -430,7 +430,7 @@
   }
 
   function shouldMakeWireDrone(currentLevel, multiplier) {
-    return (val('maps')>val('wpps'))
+    return (val('maps')>val('wpps') || val('acquiredMatterDisplay') > 0)
     && ((val('powerConsumptionRate')+PowerProductionBias) <= val('powerProductionRate')) 
     && (currentLevel < MaxDrones)
   }
