@@ -82,27 +82,22 @@
       condition: () => exists('memoryDisplay') && val('memory') < MaxMemory
     },
     {
-      description: (control) => 'project: ' + control.querySelector('span').innerText,
+      description: 'The Universe Next Door ',
       timeout: 4000,
-      control: () => [].find.call(document.querySelectorAll('.projectButton:enabled'), (p) => {
-        const title = p.querySelector('span').innerText;
-        const prestigeUCounter = val('prestigeUcounter');
-        const prestigeScounter = val('prestigeScounter');
-        if (title === 'The Universe Next Door ' && prestigeUCounter >= prestigeScounter)
-          return false; //true
-        if (title === 'The Universe Within ' && prestigeUCounter < prestigeScounter)
-          return false; //true
-        return false;
-        return title.trim().length > 0 && title.indexOf(AcceptOffer ? 'Reject' : 'Accept') < 0;
-      }),
-      condition: () => exists("prestigeDiv")
+      control: 'projectButton200',
+      condition: () => exists('prestigeDiv') && exists('projectButton200') && val('prestigeUcounter') >= val('prestigeScounter')
+    },
+    {
+      description: 'The Universe Within ',
+      timeout: 4000,
+      control: 'projectButton201',
+      condition: () => exists('prestigeDiv') && exists('projectButton201')&& val('prestigeUcounter') < val('prestigeScounter')
     },
     {
       description: (control) => 'project: ' + control.querySelector('span').innerText,
       timeout: 4000,
       control: () => [].find.call(document.querySelectorAll('.projectButton:enabled'), (p) => {
         const title = p.querySelector('span').innerText;
-        return false;
         return title.trim().length > 0 && title.indexOf(AcceptOffer ? 'Reject' : 'Accept') < 0;
       }),
       condition: () => true
