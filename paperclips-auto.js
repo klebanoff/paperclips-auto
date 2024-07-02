@@ -60,7 +60,7 @@
     const minCombatAllocation = percentages.reduce((acc, pct) => 
       Math.min(acc, Math.floor(20 * (1-ProbeCombatPercent) * pct)), Number.MAX_VALUE);
 
-    if (precombatAllocation !== 10)
+    if (precombatAllocation < 20)
       throw 'Non-Combat Probe Allocation does not equal 10';
     if (minCombatAllocation === 0)
       throw 'Combat Probe Allocation will reduce a probe to 0'
