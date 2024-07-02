@@ -7,7 +7,7 @@
 
   // Global Rule Parameters
   const AcceptOffer = true;
-  const MaxMemory = 250;
+  const MaxMemory = 300;
   const MemoryToProcessorsRatio = 2;
   const PreferredStrategyIndex = 4; // Greedy
   const SwarmComputingLevel = 150;
@@ -37,16 +37,16 @@
   // Phase 3 Rule Parameters
   const MaxProbeSpeed = 5;
   const MaxProbeNav = 10;
-  const MaxProbeRep = 10;
-  const MaxProbeHaz = 10;
+  const MaxProbeRep = 17;
+  const MaxProbeHaz = 6;
   const MaxProbeFac = 1;
   const MaxProbeHarv = 1;
   const MaxProbeWire = 1;
   // non-combat probes
   const ProbeSpeedPercent = 0.10; 
   const ProbeNavPercent = 0.09;
-  const ProbeRepPercent = 0.35;
-  const ProbeHazPercent = 0.35;
+  const ProbeRepPercent = 0.75;
+  const ProbeHazPercent = 0.30;
   const ProbeFacPercent = 0.09;
   const ProbeHarvPercent = 0.09;
   const ProbeWirePercent = 0.09;
@@ -60,8 +60,8 @@
     const minCombatAllocation = percentages.reduce((acc, pct) => 
       Math.min(acc, Math.floor(20 * (1-ProbeCombatPercent) * pct)), Number.MAX_VALUE);
 
-    if (precombatAllocation !== 20)
-      throw 'Non-Combat Probe Allocation does not equal 20';
+    if (precombatAllocation !== 10)
+      throw 'Non-Combat Probe Allocation does not equal 10';
     if (minCombatAllocation === 0)
       throw 'Combat Probe Allocation will reduce a probe to 0'
   }
@@ -86,6 +86,23 @@
       timeout: 4000,
       control: () => [].find.call(document.querySelectorAll('.projectButton:enabled'), (p) => {
         const title = p.querySelector('span').innerText;
+        const prestigeUCounter = val('prestigeUcounter');
+        const prestigeScounter = val('prestigeScounter');
+        if (title === 'The Universe Next Door ' && prestigeUCounter >= prestigeScounter)
+          return false; //true
+        if (title === 'The Universe Within ' && prestigeUCounter < prestigeScounter)
+          return false; //true
+        return false;
+        return title.trim().length > 0 && title.indexOf(AcceptOffer ? 'Reject' : 'Accept') < 0;
+      }),
+      condition: () => exists("prestigeDiv")
+    },
+    {
+      description: (control) => 'project: ' + control.querySelector('span').innerText,
+      timeout: 4000,
+      control: () => [].find.call(document.querySelectorAll('.projectButton:enabled'), (p) => {
+        const title = p.querySelector('span').innerText;
+        return false;
         return title.trim().length > 0 && title.indexOf(AcceptOffer ? 'Reject' : 'Accept') < 0;
       }),
       condition: () => true
