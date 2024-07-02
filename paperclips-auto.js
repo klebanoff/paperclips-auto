@@ -312,7 +312,7 @@
           description: '# make solar farm',
           control: 'btnMakeFarm',
           condition: () => exists('powerDiv')
-            && (val('powerConsumptionRate')+val('harvesterLevelDisplay')+FarmDroneBias) >= val('powerProductionRate')
+            && (val('powerConsumptionRate')+FarmDroneBias) >= val('powerProductionRate')
             && (val('factoryLevelDisplay') > 0)
             && ((val('harvesterLevelDisplay') > 0 && val('wireDroneLevelDisplay') > 0)
               || val('powerProductionRate') == 0)
