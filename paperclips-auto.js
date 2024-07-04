@@ -47,9 +47,9 @@
   const ProbeNavPercent = 0.09;
   const ProbeRepPercent = 0.75;
   const ProbeHazPercent = 0.30;
-  const ProbeFacPercent = 0.09;
-  const ProbeHarvPercent = 0.09;
-  const ProbeWirePercent = 0.09;
+  const ProbeFacPercent = 0.18;
+  const ProbeHarvPercent = 0.18;
+  const ProbeWirePercent = 0.18;
   // combat is independent of non-combat percentages
   const ProbeCombatPercent = 0.20;
 
