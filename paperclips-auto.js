@@ -36,7 +36,7 @@
   const FarmDroneBias = 200;
   // Phase 3 Rule Parameters
   const MaxProbeSpeed = 2;
-  const MaxProbeNav = 10;
+  const MaxProbeNav = 1;
   const MaxProbeRep = 17;
   const MaxProbeHaz = 6;
   const MaxProbeFac = 1;
@@ -44,7 +44,7 @@
   const MaxProbeWire = 1;
   // non-combat probes
   const ProbeSpeedPercent = 0.10; 
-  const ProbeNavPercent = 0.09;
+  const ProbeNavPercent = 1;
   const ProbeRepPercent = 0.60;
   const ProbeHazPercent = 0.40;
   const ProbeFacPercent = 1;
@@ -346,14 +346,34 @@
           condition: () => true
         },
         {
-          description: 'raise probe speed',
-          control: 'btnRaiseProbeSpeed',
-          condition: () => shouldRaiseProbeLevel(val('probeSpeedDisplay'), MaxProbeSpeed, ProbeSpeedPercent)
+          description: 'raise probe harv',
+          control: 'btnRaiseProbeHarv',
+          condition: () => shouldRaiseProbeLevel(val('probeHarvDisplay'), MaxProbeHarv, ProbeHarvPercent)
         },
         {
-          description: 'lower probe speed',
-          control: 'btnLowerProbeSpeed',
-          condition: () => shouldLowerProbeLevel(val('probeSpeedDisplay'), ProbeSpeedPercent)
+          description: 'lower probe harv',
+          control: 'btnLowerProbeHarv',
+          condition: () => shouldLowerProbeLevel(val('probeHarvDisplay'), ProbeHarvPercent)
+        },
+        {
+          description: 'raise probe wire',
+          control: 'btnRaiseProbeWire',
+          condition: () => shouldRaiseProbeLevel(val('probeWireDisplay'), MaxProbeWire, ProbeWirePercent)
+        },
+        {
+          description: 'lower probe wire',
+          control: 'btnLowerProbeWire',
+          condition: () => shouldLowerProbeLevel(val('probeWireDisplay'), ProbeWirePercent)
+        },
+        {
+          description: 'raise probe fac',
+          control: 'btnRaiseProbeFac',
+          condition: () => shouldRaiseProbeLevel(val('probeFacDisplay'), MaxProbeFac, ProbeFacPercent)
+        },
+        {
+          description: 'lower probe fac',
+          control: 'btnLowerProbeFac',
+          condition: () => shouldLowerProbeLevel(val('probeFacDisplay'), ProbeFacPercent)
         },
         {
           description: 'raise probe nav',
@@ -364,6 +384,16 @@
           description: 'lower probe nav',
           control: 'btnLowerProbeNav',
           condition: () => shouldLowerProbeLevel(val('probeNavDisplay'), ProbeNavPercent)
+        },
+        {
+          description: 'raise probe speed',
+          control: 'btnRaiseProbeSpeed',
+          condition: () => shouldRaiseProbeLevel(val('probeSpeedDisplay'), MaxProbeSpeed, ProbeSpeedPercent)
+        },
+        {
+          description: 'lower probe speed',
+          control: 'btnLowerProbeSpeed',
+          condition: () => shouldLowerProbeLevel(val('probeSpeedDisplay'), ProbeSpeedPercent)
         },
         {
           description: 'raise probe rep',
@@ -384,36 +414,6 @@
           description: 'lower probe haz',
           control: 'btnLowerProbeHaz',
           condition: () => shouldLowerProbeLevel(val('probeHazDisplay'), ProbeHazPercent)
-        },
-        {
-          description: 'raise probe fac',
-          control: 'btnRaiseProbeFac',
-          condition: () => shouldRaiseProbeLevel(val('probeFacDisplay'), MaxProbeFac, ProbeFacPercent)
-        },
-        {
-          description: 'lower probe fac',
-          control: 'btnLowerProbeFac',
-          condition: () => shouldLowerProbeLevel(val('probeFacDisplay'), ProbeFacPercent)
-        },
-        {
-          description: 'raise probe harv',
-          control: 'btnRaiseProbeHarv',
-          condition: () => shouldRaiseProbeLevel(val('probeHarvDisplay'), MaxProbeHarv, ProbeHarvPercent)
-        },
-        {
-          description: 'lower probe harv',
-          control: 'btnLowerProbeHarv',
-          condition: () => shouldLowerProbeLevel(val('probeHarvDisplay'), ProbeHarvPercent)
-        },
-        {
-          description: 'raise probe wire',
-          control: 'btnRaiseProbeWire',
-          condition: () => shouldRaiseProbeLevel(val('probeWireDisplay'), MaxProbeWire, ProbeWirePercent)
-        },
-        {
-          description: 'lower probe wire',
-          control: 'btnLowerProbeWire',
-          condition: () => shouldLowerProbeLevel(val('probeWireDisplay'), ProbeWirePercent)
         },
         {
           description: 'raise probe combat',
