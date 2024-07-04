@@ -418,7 +418,7 @@
         {
           description: 'raise probe combat',
           control: 'btnRaiseProbeCombat',
-          condition: () => exists('combatButtonDiv') && exists('honorDivElement')
+          condition: () => exists('combatButtonDiv') && exists('honorDisplay')
         },
         {
           description: 'launch probe',
@@ -449,12 +449,12 @@
 
   function shouldRaiseProbeLevel(currentLevel, maxValue, targetPercentage) {
     return currentLevel < Math.min(maxValue, Math.floor(val('probeTrustDisplay') 
-      * targetPercentage * ((exists('combatButtonDiv') && exists('honorDivElement')) ? 1-ProbeCombatPercent : 1)))
+      * targetPercentage * ((exists('combatButtonDiv') && exists('honorDisplay')) ? 1-ProbeCombatPercent : 1)))
   }
 
   function shouldLowerProbeLevel(currentLevel, targetPercentage) {
     return currentLevel > Math.floor(val('probeTrustDisplay') 
-      * targetPercentage * ((exists('combatButtonDiv') && exists('honorDivElement')) ? 1-ProbeCombatPercent : 1))
+      * targetPercentage * ((exists('combatButtonDiv') && exists('honorDisplay')) ? 1-ProbeCombatPercent : 1))
   }
 
   function el(id) {
