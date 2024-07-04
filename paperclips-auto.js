@@ -46,12 +46,12 @@
   const ProbeSpeedPercent = 0.10; 
   const ProbeNavPercent = 0.09;
   const ProbeRepPercent = 0.75;
-  const ProbeHazPercent = 0.30;
-  const ProbeFacPercent = 0.18;
-  const ProbeHarvPercent = 0.18;
-  const ProbeWirePercent = 0.18;
+  const ProbeHazPercent = 0.40;
+  const ProbeFacPercent = 1;
+  const ProbeHarvPercent = 1;
+  const ProbeWirePercent = 1;
   // combat is independent of non-combat percentages
-  const ProbeCombatPercent = 0.20;
+  const ProbeCombatPercent = 0.40;
 
   function validateProbePercentages() {
     const percentages = [ProbeSpeedPercent, ProbeNavPercent, ProbeRepPercent, ProbeHazPercent, 
