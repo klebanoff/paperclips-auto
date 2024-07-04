@@ -100,7 +100,7 @@
         const title = p.querySelector('span').innerText;
         return title.trim().length > 0 && title.indexOf(AcceptOffer ? 'Reject' : 'Accept') < 0;
       }),
-      condition: () => true
+      condition: () => !exists('projectButton200') && !exists('projectButton201')
     },
     {
       description: 'tournaments',
