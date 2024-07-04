@@ -31,7 +31,7 @@
   const MaxDrones = 50000;
   const MaxFactories = 160;
   const PowerProductionBias = 100;
-  const StorageToPowerProductionRatio = 70;
+  const StorageToPowerProductionRatio = 75.5;
   const DroneToFactorySquaredRatio = 7;
   const FarmDroneBias = 200;
   // Phase 3 Rule Parameters
