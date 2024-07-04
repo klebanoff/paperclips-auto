@@ -35,7 +35,7 @@
   const DroneToFactorySquaredRatio = 7;
   const FarmDroneBias = 200;
   // Phase 3 Rule Parameters
-  const MaxProbeSpeed = 5;
+  const MaxProbeSpeed = 2;
   const MaxProbeNav = 10;
   const MaxProbeRep = 17;
   const MaxProbeHaz = 6;
@@ -45,7 +45,7 @@
   // non-combat probes
   const ProbeSpeedPercent = 0.10; 
   const ProbeNavPercent = 0.09;
-  const ProbeRepPercent = 0.75;
+  const ProbeRepPercent = 0.60;
   const ProbeHazPercent = 0.40;
   const ProbeFacPercent = 1;
   const ProbeHarvPercent = 1;
