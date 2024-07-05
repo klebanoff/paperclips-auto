@@ -42,6 +42,7 @@
   const MaxProbeFac = 1;
   const MaxProbeHarv = 1;
   const MaxProbeWire = 1;
+  const MaxProbeComb = 5;
   // non-combat probes
   const ProbeSpeedPercent = 0.10; 
   const ProbeNavPercent = 1;
@@ -418,7 +419,7 @@
         {
           description: 'raise probe combat',
           control: 'btnRaiseProbeCombat',
-          condition: () => exists('combatButtonDiv') && exists('honorDiv')
+          condition: () => (exists('combatButtonDiv') && exists('honorDiv')) && (val('probeCombatDisplay')<MaxProbeComb)
         },
         {
           description: 'launch probe',
