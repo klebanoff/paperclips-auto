@@ -92,13 +92,13 @@
       description: 'The Universe Next Door ',
       timeout: 4000,
       control: 'projectButton200',
-      condition: () => exists('prestigeDiv') && exists('projectButton200') && val('prestigeUcounter') >= val('prestigeScounter')
+      condition: () => exists('prestigeDiv') && exists('projectButton200') && val('prestigeUcounter') < val('prestigeScounter')
     },
     {
       description: 'The Universe Within ',
       timeout: 4000,
       control: 'projectButton201',
-      condition: () => exists('prestigeDiv') && exists('projectButton201')&& val('prestigeUcounter') < val('prestigeScounter')
+      condition: () => exists('prestigeDiv') && exists('projectButton201')&& val('prestigeUcounter') >= val('prestigeScounter')
     },
     {
       description: (control) => 'project: ' + control.querySelector('span').innerText,
