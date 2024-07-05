@@ -46,7 +46,7 @@
   const ProbeSpeedPercent = 0.10; 
   const ProbeNavPercent = 1;
   const ProbeRepPercent = 0.60;
-  const ProbeHazPercent = 0.40;
+  const ProbeHazPercent = 0.60;
   const ProbeFacPercent = 1;
   const ProbeHarvPercent = 1;
   const ProbeWirePercent = 1;
