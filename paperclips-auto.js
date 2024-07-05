@@ -54,6 +54,12 @@
   // combat is independent of non-combat percentages
   const ProbeCombatPercent = 0.40;
 
+  const ProbeSettingsStart = [1,1,9,6,1,1,1,0]
+
+  const ProbeSettingsCombat = [1,1,6,4,1,1,1,5]
+
+  const ProbeSettingsFirstExpansion = [2,1,13,6,1,1,1,5]
+
   function validateProbePercentages() {
     const percentages = [ProbeSpeedPercent, ProbeNavPercent, ProbeRepPercent, ProbeHazPercent, 
       ProbeFacPercent, ProbeHarvPercent, ProbeWirePercent];
@@ -347,79 +353,84 @@
           condition: () => true
         },
         {
-          description: 'raise probe harv',
-          control: 'btnRaiseProbeHarv',
-          condition: () => shouldRaiseProbeLevel(val('probeHarvDisplay'), MaxProbeHarv, ProbeHarvPercent)
-        },
-        {
-          description: 'lower probe harv',
-          control: 'btnLowerProbeHarv',
-          condition: () => shouldLowerProbeLevel(val('probeHarvDisplay'), ProbeHarvPercent)
-        },
-        {
-          description: 'raise probe wire',
-          control: 'btnRaiseProbeWire',
-          condition: () => shouldRaiseProbeLevel(val('probeWireDisplay'), MaxProbeWire, ProbeWirePercent)
-        },
-        {
-          description: 'lower probe wire',
-          control: 'btnLowerProbeWire',
-          condition: () => shouldLowerProbeLevel(val('probeWireDisplay'), ProbeWirePercent)
-        },
-        {
-          description: 'raise probe fac',
-          control: 'btnRaiseProbeFac',
-          condition: () => shouldRaiseProbeLevel(val('probeFacDisplay'), MaxProbeFac, ProbeFacPercent)
-        },
-        {
-          description: 'lower probe fac',
-          control: 'btnLowerProbeFac',
-          condition: () => shouldLowerProbeLevel(val('probeFacDisplay'), ProbeFacPercent)
-        },
-        {
-          description: 'raise probe nav',
-          control: 'btnRaiseProbeNav',
-          condition: () => shouldRaiseProbeLevel(val('probeNavDisplay'), MaxProbeNav, ProbeNavPercent)
-        },
-        {
-          description: 'lower probe nav',
-          control: 'btnLowerProbeNav',
-          condition: () => shouldLowerProbeLevel(val('probeNavDisplay'), ProbeNavPercent)
-        },
-        {
           description: 'raise probe speed',
           control: 'btnRaiseProbeSpeed',
-          condition: () => shouldRaiseProbeLevel(val('probeSpeedDisplay'), MaxProbeSpeed, ProbeSpeedPercent)
+          condition: () => shouldRaiseProbeLevel(val('probeSpeedDisplay'), 0)
         },
         {
           description: 'lower probe speed',
           control: 'btnLowerProbeSpeed',
-          condition: () => shouldLowerProbeLevel(val('probeSpeedDisplay'), ProbeSpeedPercent)
+          condition: () => shouldLowerProbeLevel(val('probeSpeedDisplay'), 0)
+        },
+        {
+          description: 'raise probe nav',
+          control: 'btnRaiseProbeNav',
+          condition: () => shouldRaiseProbeLevel(val('probeNavDisplay'), 1)
+        },
+        {
+          description: 'lower probe nav',
+          control: 'btnLowerProbeNav',
+          condition: () => shouldLowerProbeLevel(val('probeNavDisplay'), 1)
         },
         {
           description: 'raise probe rep',
           control: 'btnRaiseProbeRep',
-          condition: () => shouldRaiseProbeLevel(val('probeRepDisplay'), MaxProbeRep, 1-(1/(2*(val('probeTrustDisplay')/20))))
+          condition: () => shouldRaiseProbeLevel(val('probeRepDisplay'), 2)
         },
         {
           description: 'lower probe rep',
           control: 'btnLowerProbeRep',
-          condition: () => shouldLowerProbeLevel(val('probeRepDisplay'), 1-(1/(2*(val('probeTrustDisplay')/20))))
+          condition: () => shouldLowerProbeLevel(val('probeRepDisplay'), 2)
         },
         {
           description: 'raise probe haz',
           control: 'btnRaiseProbeHaz',
-          condition: () => shouldRaiseProbeLevel(val('probeHazDisplay'), MaxProbeHaz, ProbeHazPercent)
+          condition: () => shouldRaiseProbeLevel(val('probeHazDisplay'), 3)
         },
         {
           description: 'lower probe haz',
           control: 'btnLowerProbeHaz',
-          condition: () => shouldLowerProbeLevel(val('probeHazDisplay'), ProbeHazPercent)
+          condition: () => shouldLowerProbeLevel(val('probeHazDisplay'), 3)
+        },
+        {
+          description: 'raise probe harv',
+          control: 'btnRaiseProbeHarv',
+          condition: () => shouldRaiseProbeLevel(val('probeHarvDisplay'), 4)
+        },
+        {
+          description: 'lower probe harv',
+          control: 'btnLowerProbeHarv',
+          condition: () => shouldLowerProbeLevel(val('probeHarvDisplay'), 4)
+        },
+        {
+          description: 'raise probe wire',
+          control: 'btnRaiseProbeWire',
+          condition: () => shouldRaiseProbeLevel(val('probeWireDisplay'),5)
+        },
+        {
+          description: 'lower probe wire',
+          control: 'btnLowerProbeWire',
+          condition: () => shouldLowerProbeLevel(val('probeWireDisplay'), 5)
+        },
+        {
+          description: 'raise probe fac',
+          control: 'btnRaiseProbeFac',
+          condition: () => shouldRaiseProbeLevel(val('probeFacDisplay'), 6)
+        },
+        {
+          description: 'lower probe fac',
+          control: 'btnLowerProbeFac',
+          condition: () => shouldLowerProbeLevel(val('probeFacDisplay'), 6)
         },
         {
           description: 'raise probe combat',
           control: 'btnRaiseProbeCombat',
-          condition: () => (exists('combatButtonDiv') && exists('honorDiv')) && (val('probeCombatDisplay')<=MaxProbeComb)
+          condition: () => shouldRaiseProbeLevel(val('probeCombatDisplay'), 7)
+        },
+        {
+          description: 'lower probe combat',
+          control: 'btnLowerProbeCombat',
+          condition: () => shouldLowerProbeLevel(val('probeCombatDisplay'), 7)
         },
         {
           description: 'launch probe',
@@ -448,15 +459,42 @@
     && (currentLevel < MaxDrones)
   }
 
-  function shouldRaiseProbeLevel(currentLevel, maxValue, targetPercentage) {
-    return currentLevel < Math.min(maxValue, Math.floor(val('probeTrustDisplay') 
-      * targetPercentage * ((exists('combatButtonDiv') && exists('honorDiv')) ? 1-ProbeCombatPercent : 1)))
+  function shouldRaiseProbeLevel(currentLevel, index) {
+    var settings = ProbeSettingsStart;
+    if (exists('combatButtonDiv') && exists('honorDiv'))
+    {
+      settings = ProbeSettingsCombat;
+      if (val('probeTrustDisplay')>=30)
+      {
+        settings = ProbeSettingsFirstExpansion;
+      }
+    }
+    var desiredLevel = settings[index];
+    if (index === 2)
+    {
+      desiredLevel = val('probeTrustDisplay') - (settings[0]+settings[1]+settings[3]+settings[4]+settings[5]+settings[6]+settings[7])
+    }
+    return currentLevel < desiredLevel
   }
 
-  function shouldLowerProbeLevel(currentLevel, targetPercentage) {
-    return currentLevel > Math.floor(val('probeTrustDisplay') 
-      * targetPercentage * ((exists('combatButtonDiv') && exists('honorDiv')) ? 1-ProbeCombatPercent : 1))
+  function shouldLowerProbeLevel(currentLevel, index) {
+    var settings = ProbeSettingsStart;
+    if (exists('combatButtonDiv') && exists('honorDiv'))
+    {
+      settings = ProbeSettingsCombat;
+      if (val('probeTrustDisplay')>=30)
+      {
+        settings = ProbeSettingsFirstExpansion;
+      }
+    }
+    var desiredLevel = settings[index];
+    if (index === 2)
+    {
+      desiredLevel = val('probeTrustDisplay') - (settings[0]+settings[1]+settings[3]+settings[4]+settings[5]+settings[6]+settings[7])
+    }
+    return currentLevel > desiredLevel
   }
+
 
   function el(id) {
     if (id in cache) {
