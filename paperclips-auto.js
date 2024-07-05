@@ -399,12 +399,12 @@
         {
           description: 'raise probe rep',
           control: 'btnRaiseProbeRep',
-          condition: () => shouldRaiseProbeLevel(val('probeRepDisplay'), MaxProbeRep, ProbeRepPercent)
+          condition: () => shouldRaiseProbeLevel(val('probeRepDisplay'), MaxProbeRep, 1.1-(1/(1.5*(val('probeTrustDisplay')/20))))
         },
         {
           description: 'lower probe rep',
           control: 'btnLowerProbeRep',
-          condition: () => shouldLowerProbeLevel(val('probeRepDisplay'), ProbeRepPercent)
+          condition: () => shouldLowerProbeLevel(val('probeRepDisplay'), 1.1-(1/(1.5*(val('probeTrustDisplay')/20))))
         },
         {
           description: 'raise probe haz',
