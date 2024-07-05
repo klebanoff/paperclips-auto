@@ -37,7 +37,7 @@
   // Phase 3 Rule Parameters
   const MaxProbeSpeed = 2;
   const MaxProbeNav = 1;
-  const MaxProbeRep = 17;
+  const MaxProbeRep = 99;
   const MaxProbeHaz = 6;
   const MaxProbeFac = 1;
   const MaxProbeHarv = 1;
