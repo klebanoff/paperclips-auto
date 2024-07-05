@@ -419,7 +419,7 @@
         {
           description: 'raise probe combat',
           control: 'btnRaiseProbeCombat',
-          condition: () => (exists('combatButtonDiv') && exists('honorDiv')) && (val('probeCombatDisplay')<MaxProbeComb)
+          condition: () => (exists('combatButtonDiv') && exists('honorDiv')) && (val('probeCombatDisplay')<=MaxProbeComb)
         },
         {
           description: 'launch probe',
