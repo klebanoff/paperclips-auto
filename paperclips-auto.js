@@ -263,7 +263,7 @@
           control: 'btnMakeFactory',
           condition: () => exists('factoryDiv')
             && (val('factoryLevelDisplay') < MaxFactories)
-            && ((val('powerConsumptionRate')+PowerProductionBias) <= val('powerProductionRate')
+            && ((val('powerConsumptionRate')+val('harvesterLevelDisplay')+PowerProductionBias) <= val('powerProductionRate')
               || val('factoryLevelDisplay') === 0)
         },
         {
