@@ -31,7 +31,7 @@
   const MaxDrones = 50000;
   const MaxFactories = 160;
   const PowerProductionBias = 100;
-  const StorageToPowerProductionRatio = 75.5;
+  const StorageToPowerProductionRatio = 70;
   const DroneToFactorySquaredRatio = 7;
   const FarmDroneBias = 200;
   // Phase 3 Rule Parameters
@@ -263,7 +263,7 @@
           control: 'btnMakeFactory',
           condition: () => exists('factoryDiv')
             && (val('factoryLevelDisplay') < MaxFactories)
-            && ((val('powerConsumptionRate')+val('harvesterLevelDisplay')+PowerProductionBias) <= val('powerProductionRate')
+            && ((val('powerConsumptionRate')+PowerProductionBias) <= val('powerProductionRate')
               || val('factoryLevelDisplay') === 0)
         },
         {
@@ -324,7 +324,7 @@
           description: '# make solar farm',
           control: 'btnMakeFarm',
           condition: () => exists('powerDiv')
-            && (val('powerConsumptionRate')+FarmDroneBias) >= val('powerProductionRate')
+            && (val('powerConsumptionRate')+val('harvesterLevelDisplay')+FarmDroneBias) >= val('powerProductionRate')
             && (val('factoryLevelDisplay') > 0)
             && ((val('harvesterLevelDisplay') > 0 && val('wireDroneLevelDisplay') > 0)
               || val('powerProductionRate') == 0)
