@@ -91,13 +91,13 @@
     {
       description: 'The Universe Next Door ',
       timeout: 100,
-      control: el('projectButton200'),
+      control: () => el('projectButton200'),
       condition: () => exists('prestigeDiv') && exists('projectButton200') && val('prestigeUcounter') < val('prestigeScounter')
     },
     {
       description: 'The Universe Within ',
       timeout: 100,
-      control: el('projectButton201'),
+      control: () => el('projectButton201'),
       condition: () => exists('prestigeDiv') && exists('projectButton201')&& val('prestigeUcounter') >= val('prestigeScounter')
     },
     {
@@ -107,7 +107,7 @@
         const title = p.querySelector('span').innerText;
         return title.trim().length > 0 && title.indexOf(AcceptOffer ? 'Reject' : 'Accept') < 0;
       }),
-      condition: () => !exists('projectButton200') || !exists('projectButton201')
+      condition: () => !exists('projectButton200') && !exists('projectButton201')
     },
     {
       description: 'tournaments',
