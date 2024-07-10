@@ -461,7 +461,8 @@
 
   function shouldRaiseProbeLevel(currentLevel, index) {
     var settings = ProbeSettingsStart;
-    if (exists('combatButtonDiv') && exists('honorDiv'))
+    //if (exists('combatButtonDiv') && exists('honorDiv'))
+    if (exists('combatButtonDiv'))
     {
       settings = ProbeSettingsCombat;
       if (val('probeTrustDisplay')>=30)
@@ -479,7 +480,8 @@
 
   function shouldLowerProbeLevel(currentLevel, index) {
     var settings = ProbeSettingsStart;
-    if (exists('combatButtonDiv') && exists('honorDiv'))
+    //if (exists('combatButtonDiv') && exists('honorDiv'))
+    if (exists('combatButtonDiv'))
     {
       settings = ProbeSettingsCombat;
       if (val('probeTrustDisplay')>=30)
