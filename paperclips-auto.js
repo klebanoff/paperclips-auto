@@ -4,6 +4,7 @@
   window.__paperclips_auto = true;
 
   let cache = {};
+  let phase3Timer = Date.now();
 
   // Global Rule Parameters
   const AcceptOffer = true;
@@ -35,6 +36,7 @@
   const DroneToFactorySquaredRatio = 7;
   const FarmDroneBias = 200;
   // Phase 3 Rule Parameters
+  const SecDronesCanHarvest = 30;
   const MaxProbeSpeed = 2;
   const MaxProbeNav = 1;
   const MaxProbeRep = 99;
@@ -172,8 +174,8 @@
         {
           description: 'swarm computing adjustment phase 3',
           control: 'slider',
-          condition: () => exists('probeDesignDiv') && exists('swarmSliderDiv') && parseFloat(el('slider').value) !== SwarmComputingLevel,
-          action: (control) => control.value = SwarmComputingLevel
+          condition: () => exists('probeDesignDiv') && exists('swarmSliderDiv') && parseFloat(el('slider').value) !== swarmControl3rdPhaseValue(),
+          action: (control) => control.value = swarmControl3rdPhaseValue()
         }
       ]
     },
@@ -460,14 +462,14 @@
   }
 
   function shouldRaiseProbeLevel(currentLevel, index) {
-    var settings = ProbeSettingsStart;
+    var settings = GetProbeSettings(ProbeSettingsStart);
     //if (exists('combatButtonDiv') && exists('honorDiv'))
     if (exists('combatButtonDiv'))
     {
-      settings = ProbeSettingsCombat;
+      settings = GetProbeSettings(ProbeSettingsCombat);
       if (val('probeTrustDisplay')>=30)
       {
-        settings = ProbeSettingsFirstExpansion;
+        settings = GetProbeSettings(ProbeSettingsFirstExpansion);
       }
     }
     var desiredLevel = settings[index];
@@ -479,14 +481,14 @@
   }
 
   function shouldLowerProbeLevel(currentLevel, index) {
-    var settings = ProbeSettingsStart;
+    var settings = GetProbeSettings(ProbeSettingsStart);
     //if (exists('combatButtonDiv') && exists('honorDiv'))
     if (exists('combatButtonDiv'))
     {
-      settings = ProbeSettingsCombat;
+      settings = GetProbeSettings(ProbeSettingsCombat);
       if (val('probeTrustDisplay')>=30)
       {
-        settings = ProbeSettingsFirstExpansion;
+        settings = GetProbeSettings(ProbeSettingsFirstExpansion);
       }
     }
     var desiredLevel = settings[index];
@@ -497,6 +499,52 @@
     return currentLevel > desiredLevel
   }
 
+  function swarmControl3rdPhaseValue()
+  {
+    if (phase3CheckInNeedOfClips())
+    {
+      return SwarmComputingLevel;
+    }
+    return 200;
+  }
+
+  function GetProbeSettings(probeSettings)
+  {
+    if (phase3CheckInNeedOfClips())
+    {
+      return probeSettings;
+    }
+    return settingsArray = probeSettings.map((e, i, a) => {
+      if (i === 2)
+      {
+        return e + 3;
+      }
+      if (i === 4 || i === 5 || i === 6)
+      {
+        return e - 1;
+      }
+      return e;
+    });
+  }
+
+  function phase3CheckInNeedOfClips()
+  {
+    if (!exists('probeDesignDiv'))
+    {
+      return false;
+    }
+
+    if (Date.now() <= phase3Timer)
+    {
+      return true;
+    }
+    if (val('unusedClipsDisplay') === 0)
+    {
+      phase3Timer = Date.now() + SecDronesCanHarvest*1000;
+      return true;
+    }
+    return false;
+  }
 
   function el(id) {
     if (id in cache) {
