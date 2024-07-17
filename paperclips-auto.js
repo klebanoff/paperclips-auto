@@ -12,6 +12,7 @@
   const MemoryToProcessorsRatio = 2;
   const PreferredStrategyIndex = 4; // Greedy
   const SwarmComputingLevel = 150;
+  const ExclideProjects = ['projectButton200', 'projectButton201', 'projectButton46']
   // Phase 1 Rule Parameters
   const MinWire = 10;
   const MaxMarketing = 20;
@@ -95,13 +96,23 @@
       condition: () => exists('prestigeDiv') && exists('projectButton201')&& val('prestigeUcounter') >= val('prestigeScounter')
     },
     {
+      description: 'Space Exploration ',
+      timeout: 100,
+      control: () => el('projectButton46'),
+      condition: () => exists('projectButton46') && enabled('projectButton46') && val('processors') > 500
+    },
+    {
       description: (control) => 'project: ' + control.querySelector('span').innerText,
       timeout: 4000,
       control: () => [].find.call(document.querySelectorAll('.projectButton:enabled'), (p) => {
         const title = p.querySelector('span').innerText;
+        if (ExclideProjects.includes(p.id))
+        {
+          return false;
+        }
         return title.trim().length > 0 && title.indexOf(AcceptOffer ? 'Reject' : 'Accept') < 0;
       }),
-      condition: () => !exists('projectButton200') && !exists('projectButton201')
+      condition: () => true
     },
     {
       description: 'tournaments',
@@ -529,7 +540,11 @@
     {
       return true;
     }
-    if (val('unusedClipsDisplay') === 0 || (val('harvesterLevelSpace') === 0 || val('wireDroneLevelSpace') === 0 || val('factoryLevelDisplaySpace') === 0 || !enabled('btnMakeProbe')))
+    if (val('unusedClipsDisplay') === 0 || 
+    (val('harvesterLevelSpace') < 10 || 
+    val('wireDroneLevelSpace') < 10 || 
+    val('factoryLevelDisplaySpace') < 10 || 
+    !enabled('btnMakeProbe')))
     {
       phase3Timer = Date.now() + SecDronesCanHarvest*1000;
       return true;
