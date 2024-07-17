@@ -533,12 +533,11 @@
     {
       return false;
     }
-
     if (Date.now() <= phase3Timer)
     {
       return true;
     }
-    if (val('unusedClipsDisplay') === 0)
+    if (val('unusedClipsDisplay') === 0 || (val('harvesterLevelSpace') === 0 || val('wireDroneLevelSpace') === 0 || val('factoryLevelDisplaySpace') === 0))
     {
       phase3Timer = Date.now() + SecDronesCanHarvest*1000;
       return true;
