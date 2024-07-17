@@ -37,14 +37,6 @@
   const FarmDroneBias = 200;
   // Phase 3 Rule Parameters
   const SecDronesCanHarvest = 30;
-  const MaxProbeSpeed = 2;
-  const MaxProbeNav = 1;
-  const MaxProbeRep = 99;
-  const MaxProbeHaz = 6;
-  const MaxProbeFac = 1;
-  const MaxProbeHarv = 1;
-  const MaxProbeWire = 1;
-  const MaxProbeComb = 5;
   // non-combat probes
   const ProbeSpeedPercent = 0.10; 
   const ProbeNavPercent = 1;
