@@ -30,8 +30,9 @@
   const MinActiveInvestmentLevel = 10000000;
   const MinFundsForActiveInvestment = 900000;
   // Phase 2 Rule Parameters
-  const MaxDrones = 50000;
+  const MaxDrones = 2000000;
   const MaxFactories = 160;
+  const MaxStorage = 1200;
   const PowerProductionBias = 100;
   const StorageToPowerProductionRatio = 70;
   const DroneToFactorySquaredRatio = 7;
@@ -282,7 +283,7 @@
           description: '# make battery tower',
           control: 'btnMakeBattery',
           condition: () => exists('powerDiv')
-            && val('maxStorage') <= val('powerProductionRate')*StorageToPowerProductionRatio
+            && val('maxStorage') <= val('powerProductionRate')*StorageToPowerProductionRatio && val('batteryLevel') < MaxStorage
         },
         {
           description: 'drone manufacturing',
@@ -336,7 +337,7 @@
           description: '# make solar farm',
           control: 'btnMakeFarm',
           condition: () => exists('powerDiv')
-            && (val('powerConsumptionRate')+val('harvesterLevelDisplay')+FarmDroneBias) >= val('powerProductionRate')
+            && (val('powerConsumptionRate')+getDroneBias()) >= val('powerProductionRate')
             && (val('factoryLevelDisplay') > 0)
             && ((val('harvesterLevelDisplay') > 0 && val('wireDroneLevelDisplay') > 0)
               || val('powerProductionRate') == 0)
@@ -462,6 +463,15 @@
     return (val('maps')>val('wpps') || val('acquiredMatterDisplay') > 0)
     && ((val('powerConsumptionRate')+PowerProductionBias) <= val('powerProductionRate')) 
     && (currentLevel < MaxDrones)
+  }
+
+  function getDroneBias()
+  {
+    if ((val('harvesterLevelDisplay')+FarmDroneBias) > 10000)
+    {
+      return 10000;
+    }
+    return val('harvesterLevelDisplay')+FarmDroneBias;
   }
 
   function shouldRaiseProbeLevel(currentLevel, index) {
