@@ -100,7 +100,7 @@
       description: 'Space Exploration ',
       timeout: 100,
       control: () => el('projectButton46'),
-      condition: () => exists('projectButton46') && enabled('projectButton46') && val('processors') > 500
+      condition: () => exists('projectButton46') && enabled('projectButton46') && val('processors') > 300
     },
     {
       description: (control) => 'project: ' + control.querySelector('span').innerText,
@@ -460,7 +460,7 @@
   }
 
   function shouldMakeWireDrone(currentLevel, multiplier) {
-    return (val('maps')>val('wpps') || val('acquiredMatterDisplay') > 0)
+    return (val('maps')>val('wpps') || val('acquiredMatterDisplay') > 0 || val('wireDroneLevelDisplay') + multiplier < val('harvesterLevelDisplay'))
     && ((val('powerConsumptionRate')+PowerProductionBias) <= val('powerProductionRate')) 
     && (currentLevel < MaxDrones)
   }
