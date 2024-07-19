@@ -551,9 +551,9 @@
       return true;
     }
     if (val('unusedClipsDisplay') === 0 || 
-    (val('harvesterLevelSpace') < 10 || 
-    val('wireDroneLevelSpace') < 10 || 
-    val('factoryLevelDisplaySpace') < 10 || 
+    (val('harvesterLevelSpace') === 0 || 
+    val('wireDroneLevelSpace') === 0 || 
+    val('factoryLevelDisplaySpace') === 0 || 
     !enabled('btnMakeProbe')))
     {
       phase3Timer = Date.now() + SecDronesCanHarvest*1000;
