@@ -453,8 +453,8 @@
   ]
 
   function shouldMakeHarvesterDrone(currentLevel, multiplier) {
-    return (currentLevel + multiplier <= DroneToFactorySquaredRatio * val('factoryLevelDisplay') ** 2)
-      && (currentLevel + multiplier * 10 > DroneToFactorySquaredRatio * val('factoryLevelDisplay') ** 2)
+    return (((currentLevel + multiplier <= DroneToFactorySquaredRatio * val('factoryLevelDisplay') ** 2)
+      && (currentLevel + multiplier * 10 > DroneToFactorySquaredRatio * val('factoryLevelDisplay') ** 2)) || val('factoryLevelDisplay') === MaxFactories)
       && ((val('powerConsumptionRate')+PowerProductionBias) <= val('powerProductionRate'))
       && (currentLevel < MaxDrones)
   }
