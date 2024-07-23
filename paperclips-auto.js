@@ -334,6 +334,20 @@
           ]
         },
         {
+          description: '# make solar farm x 100',
+          control: 'btnFarmx100',
+          condition: () => exists('powerDiv')
+            && (val('powerConsumptionRate')+getDroneBias()) >= val('powerProductionRate')
+            && enabled('btnFarmx100')
+        },
+        {
+          description: '# make solar farm x 10',
+          control: 'btnMakeFarm10',
+          condition: () => exists('powerDiv')
+            && (val('powerConsumptionRate')+getDroneBias()) >= val('powerProductionRate')
+            && enabled('btnFarmx10')
+        },
+        {
           description: '# make solar farm',
           control: 'btnMakeFarm',
           condition: () => exists('powerDiv')
