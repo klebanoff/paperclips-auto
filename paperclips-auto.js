@@ -66,7 +66,15 @@
   const ProbeSettingsCombat = [1,1,6,4,1,1,1,5]
 
   const ProbeSettingsFirstExpansion = [2,1,13,6,1,1,1,5]
-
+  
+  function GetQChipComputeValue()
+  {
+    let chips = document.querySelectorAll('.qChip');
+    if (chips.length > 0) {
+      return [].reduce.call(chips, (sum, el) => sum + parseFloat(el.style.opacity), 0) / chips.length;
+    }
+  }
+  
   function validateProbePercentages() {
     const percentages = [ProbeSpeedPercent, ProbeNavPercent, ProbeRepPercent, ProbeHazPercent, 
       ProbeFacPercent, ProbeHarvPercent, ProbeWirePercent];
@@ -118,7 +126,7 @@
       timeout: 4000,
       control: () => [].find.call(document.querySelectorAll('.projectButton:enabled'), (p) => {
         const title = p.querySelector('span').innerText;
-        if (document.querySelectorAll('.qChip').length === 0)
+        if (!exists('btnQcompute') && isNaN(GetQChipComputeValue()))
         {
           return PhaseOneCrucialProjects.includes(p.id);
         }
@@ -157,11 +165,7 @@
       control: 'btnQcompute',
       continue: true,
       condition: () => {
-        var chips = document.querySelectorAll('.qChip');
-        if (chips.length > 0) {
-          const q = [].reduce.call(chips, (sum, el) => sum + parseFloat(el.style.opacity), 0) / chips.length;
-          return q > 0;
-        }
+          return GetQChipComputeValue() > 0;
       }
     },
     {
