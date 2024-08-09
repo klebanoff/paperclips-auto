@@ -126,7 +126,7 @@
       timeout: 4000,
       control: () => [].find.call(document.querySelectorAll('.projectButton:enabled'), (p) => {
         const title = p.querySelector('span').innerText;
-        if (!exists('btnQcompute') && isNaN(GetQChipComputeValue()))
+        if (!exists('qComputing') && isNaN(GetQChipComputeValue()))
         {
           return PhaseOneCrucialProjects.includes(p.id);
         }
