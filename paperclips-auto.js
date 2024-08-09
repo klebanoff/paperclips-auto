@@ -12,8 +12,19 @@
   const MemoryToProcessorsRatio = 2;
   const PreferredStrategyIndex = 4; // Greedy
   const SwarmComputingLevel = 150;
-  const ExclideProjects = ['projectButton200', 'projectButton201', 'projectButton46']
+  const ExcludeProjects = ['projectButton200', 'projectButton201', 'projectButton46'];
+  
   // Phase 1 Rule Parameters
+  const PhaseOneCrucialProjects = [
+      'projectButton3', 
+      'projectButton6', 
+      'projectButton13', 
+      'projectButton14', 
+      'projectButton15', 
+      'projectButton17', 
+      'projectButton19', 
+      'projectButton50', 
+      'projectButton51'];
   const MinWire = 10;
   const MaxMarketing = 20;
   const MinClipPrice = 0.01;
@@ -107,7 +118,11 @@
       timeout: 4000,
       control: () => [].find.call(document.querySelectorAll('.projectButton:enabled'), (p) => {
         const title = p.querySelector('span').innerText;
-        if (ExclideProjects.includes(p.id))
+        if (document.querySelectorAll('.qChip').length === 0)
+        {
+          return PhaseOneCrucialProjects.includes(p.id);
+        }
+        if (ExcludeProjects.includes(p.id))
         {
           return false;
         }
@@ -489,7 +504,7 @@
   }
 
   function shouldRaiseProbeLevel(currentLevel, index) {
-    var settings = GetProbeSettings(ProbeSettingsStart);
+    let settings = GetProbeSettings(ProbeSettingsStart);
     //if (exists('combatButtonDiv') && exists('honorDiv'))
     if (exists('combatButtonDiv'))
     {
@@ -499,7 +514,7 @@
         settings = GetProbeSettings(ProbeSettingsFirstExpansion);
       }
     }
-    var desiredLevel = settings[index];
+    let desiredLevel = settings[index];
     if (index === 2)
     {
       desiredLevel = val('probeTrustDisplay') - settings.reduce((acc,curr,i) => { return i===2?acc:  acc +curr },0);
@@ -508,7 +523,7 @@
   }
 
   function shouldLowerProbeLevel(currentLevel, index) {
-    var settings = GetProbeSettings(ProbeSettingsStart);
+    let settings = GetProbeSettings(ProbeSettingsStart);
     //if (exists('combatButtonDiv') && exists('honorDiv'))
     if (exists('combatButtonDiv'))
     {
@@ -518,7 +533,7 @@
         settings = GetProbeSettings(ProbeSettingsFirstExpansion);
       }
     }
-    var desiredLevel = settings[index];
+    let desiredLevel = settings[index];
     if (index === 2)
     {
       desiredLevel = val('probeTrustDisplay') - settings.reduce((acc,curr,i) => { return i===2?acc:  acc +curr },0);
@@ -541,7 +556,7 @@
     {
       return probeSettings;
     }
-    return settingsArray = probeSettings.map((e, i, a) => {
+    return probeSettings.map((e, i, a) => {
       if (i === 2)
       {
         return e + 3;
