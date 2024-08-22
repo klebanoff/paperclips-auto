@@ -12,7 +12,7 @@
   const MemoryToProcessorsRatio = 2;
   const PreferredStrategyIndex = 4; // Greedy
   const SwarmComputingLevel = 150;
-  const ExcludeProjects = ['projectButton200', 'projectButton201', 'projectButton46'];
+  const ExcludeProjects = ['projectButton200', 'projectButton201', 'projectButton46', 'projectButton35'];
   
   // Phase 1 Rule Parameters
   const PhaseOneCrucialProjects = [
@@ -40,6 +40,7 @@
   const MinPassiveInvestmentLevel = 30000;
   const MinActiveInvestmentLevel = 10000000;
   const MinFundsForActiveInvestment = 900000;
+  const MinClipsForNextPhase = 300 * 1000000;
   // Phase 2 Rule Parameters
   const MaxDrones = 2000000;
   const MaxFactories = 160;
@@ -48,6 +49,7 @@
   const StorageToPowerProductionRatio = 70;
   const DroneToFactorySquaredRatio = 7;
   const FarmDroneBias = 200;
+  const MinProcessorsForNextPhase = 200;
   // Phase 3 Rule Parameters
   const SecDronesCanHarvest = 30;
   // non-combat probes
@@ -119,7 +121,13 @@
       description: 'Space Exploration ',
       timeout: 100,
       control: () => el('projectButton46'),
-      condition: () => exists('projectButton46') && enabled('projectButton46') && val('processors') > 300
+      condition: () => exists('projectButton46') && enabled('projectButton46') && val('processors') > MinProcessorsForNextPhase
+    },
+    {
+      description: 'Release the HypnoDrones ',
+      timeout: 100,
+      control: () => el('projectButton35'),
+      condition: () => exists('projectButton35') && enabled('projectButton35') && val('clips') > MinClipsForNextPhase
     },
     {
       description: (control) => 'project: ' + control.querySelector('span').innerText,
