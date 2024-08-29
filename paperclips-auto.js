@@ -131,7 +131,7 @@
     },
     {
       description: (control) => 'project: ' + control.querySelector('span').innerText,
-      timeout: 4000,
+      timeout: 4000 / (2 * document.querySelectorAll('.projectButton:enabled').length),
       control: () => [].find.call(document.querySelectorAll('.projectButton:enabled'), (p) => {
         const title = p.querySelector('span').innerText;
         if (!exists('qComputing') || isNaN(GetQChipComputeValue()) || GetQChipComputeValue() === 0)
@@ -586,6 +586,10 @@
     if (!exists('probeDesignDiv'))
     {
       return false;
+    }
+    if (val('colonizedDisplay') >= 100)
+    {
+      return true;
     }
     if (Date.now() <= phase3Timer)
     {
