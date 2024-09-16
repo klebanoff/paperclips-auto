@@ -49,7 +49,7 @@
   const StorageToPowerProductionRatio = 70;
   const DroneToFactorySquaredRatio = 7;
   const FarmDroneBias = 200;
-  const MinProcessorsForNextPhase = 200;
+  const MinProcessorsForNextPhase = 150;
   // Phase 3 Rule Parameters
   const SecDronesCanHarvest = 30;
   // non-combat probes
